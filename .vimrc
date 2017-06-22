@@ -13,6 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'benmills/vimux'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'

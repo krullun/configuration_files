@@ -104,9 +104,13 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+#add background color to terminal
+#for((i=16; i<256; i++)); do
+#    printf "\e[48;5;${i}m%03d" $i;
+#    printf '\e[0m';
+#	[ ! $((($i - 15) % 6)) -eq 0 ] && printf ' ' || printf '\n'
+#done
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -144,6 +148,18 @@ extract () {
    fi
 }
 
+characters="apt beavis.zen bong bud-frogs bunny calvin cheese cock cower daemon default
+dragon dragon-and-cow duck elephant elephant-in-snake eyes flaming-sheep
+ghostbusters gnu head-in hellokitty kiss koala kosh luke-koala mech-and-cow
+milk moofasa moose mutilated pony pony-smaller ren sheep skeleton snowman
+sodomized-sheep stegosaurus stimpy suse three-eyes turkey turtle tux
+unipony unipony-smaller vader vader-koala www"
+ch=($characters)
+index=$(( RANDOM % ${#ch[@]} ))
+cowsay -f ${ch[${index}]} "Hello, today is $(date +%A)
+											$(fortune -so)"
+#cowsay -f ${ch[${index}]} "Hello, the time is $(date "+%k:%M, on %A, %d of %B, %Y.")"
+
 #Color for man pages, makes it easier to read
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -153,14 +169,20 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+#Shell Prompt
+STARTFGCOLOR='\e[1;39m';
+STARTBGCOLOR="\e[44m"
+ENDCOLOR="\e[0m"
+export PS1="$STARTFGCOLOR$STARTBGCOLOR\u@\h \w> $ENDCOLOR"
+
 #Moving up the folders
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias .....="cd ../../../.."
 
 #Aliases
 alias ll='ls -AlhG'
 alias ipext='curl -s https://www.expressvpn.com/what-is-my-ip | grep -o '[0-9]*[0-9][.][0-9]*[0-9][.][0-9]*[0-9][.][0-9]*[0-9]''
 alias reset='. ~/.bashrc'
+alias agi='sudo apt-get install'
 alias update='sudo apt-get update; sudo apt-get upgrade'
